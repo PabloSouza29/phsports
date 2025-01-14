@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - PH SPORTS</title>
+
+  <!-- CSS Embutido -->
+  <style>
+    /* Reset de estilos padrão */
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        color: #e1e1e6;
+        background-color: #f4f4f4;
+    }
+
+    /* Links sem sublinhado */
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    /* Estilo do cabeçalho */
+    header {
+        background-color: #202024;  /* Cor de fundo do cabeçalho igual ao do index.html */
+        position: relative;
+        box-shadow: rgb(0 0 0 / 75%) 0px 13px 30px -12px;
+        padding: 10px 0;  /* Ajustei o padding para ser mais compacto */
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 16px;  /* Adicionei um padding para alinhar o conteúdo */
+    }
+
+    .brand-name {
+        font-family: 'Times New Roman', serif;  /* Fonte do cabeçalho */
+        font-size: 32px;
+        font-weight: bold;
+        color: red;
+    }
+
+    .navbar-links {
+        display: flex;
+        gap: 16px;
+    }
+
+    .navbar-links li {
+        font-size: 20px;
+        color: red;
+        transition: color 0.1s;
+    }
+
+    .navbar-links li.active,
+    .navbar-links li:hover {
+        color: #e1e1e6;
+    }
+
+    .navbar-links li a {
+        padding: 8px;
+        font-family: 'Times New Roman', serif;  /* Fonte do link */
+        font-size: 20px;  /* Tamanho do "A" no link */
+    }
+
+    /* Menu hambúrguer - visível em telas pequenas */
+    .menu-hamb-button {
+        display: none;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 1002; /* Coloca o botão acima do conteúdo e do menu */
+    }
+
+    @media (min-width: 960px) {
+        .hide-on-desktop {
+            display: none;
+        }
+    }
+
+    @media (max-width: 960px) {
+        .navbar-links {
+            opacity: 0;
+            transform: translateY(-140%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            background-color: #202024;
+            box-shadow: rgb(0 0 0 / 75%) 0px 13px 30px -12px;
+            padding: 32px 0;
+            gap: 0;
+            z-index: 1001; /* Coloca o menu sobre o conteúdo */
+            transition: 0.5s;
+        }
+
+        .navbar-links.show {
+            opacity: 1;
+            top: 100%;
+            transform: translateY(0);
+        }
+
+        .navbar-links li {
+            text-align: center;
+        }
+
+        .navbar-links li a {
+            line-height: 40px;
+            width: 100%;
+            display: block;
+        }
+
+        .menu-hamb-button {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1002; /* O botão de hambúrguer estará acima do menu */
+        }
+
+        .btn-line {
+            width: 24px;
+            height: 3px;
+            background: #e1e1e6;
+            transition: 0.3s;
+        }
+
+        .menu-hamb-button.isOpen .btn-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-hamb-button.isOpen .btn-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-hamb-button.isOpen .btn-line:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .menu-overlay {
+            position: unset;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000; /* Sobrepõe o conteúdo, mas fica abaixo do botão de hambúrguer */
+        }
+
+        .menu-overlay.show {
+            position: fixed;
+        }
+    }
+
+    /* Estilo do conteúdo da página de contato */
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: red;
+        text-align: center;
+    }
+
+    h3 {
+        color: red;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    input, textarea {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #D32F2F;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #880808;
+    }
+
+    /* Redes sociais */
+    ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    ul li {
+        display: inline-block;
+        margin: 10px;
+    }
+
+    ul li a {
+        text-decoration: none;
+        font-size: 18px;
+        color: red;
+        font-weight: bold;
+    }
+
+    ul li a:hover {
+        color: white;
+    }
+
+    /* Rodapé */
+    footer {
+        background-color: #000;
+        color: white;
+        text-align: center;
+        padding: 30px 0;  /* Aumentei a altura do rodapé */
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    footer p {
+        font-size: 16px;
+    }
+
+    /* Contato (telefone e e-mail) */
+    .contact-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .contact-info p {
+        font-size: 18px;
+        color: red;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header>
+    <nav>
+      <a href="/" class="brand-name">PH SPORTS</a>
+    
+      <ul class="navbar-links">
+        <li>
+          <a href="/">Início</a>
+        </li>
+        <li>
+          <a href="camisetas.html">Camisetas</a>
+        </li>
+        <li>
+          <a href="populares.html">Populares</a>
+        </li>
+        <li class="active">
+          <a href="contatos.html">Contato</a>
+        </li>
+      </ul>
+
+      <div class="menu-hamb-button hide-on-desktop">
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="menu-overlay hide-on-desktop"></div>
+
+  <!-- Conteúdo da Página de Contato -->
+  <div class="container">
+    <h2>Entre em Contato Conosco</h2>
+    <form action="enviar_email.php" method="POST">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="assunto">Assunto</label>
+      <input type="text" id="assunto" name="assunto" required>
+
+      <label for="mensagem">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+      <input type="submit" value="Enviar Mensagem">
+    </form>
+
+    <h3>Redes Sociais</h3>
+    <ul>
+      <li><a href="https://www.instagram.com/PH_SPORTSZ" target="_blank">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@PH.SPORTS24" target="_blank">TikTok</a></li>
+    </ul>
+
+    <div class="contact-info">
+      <p>Telefone: (11) 99993-6174</p>
+      <p>E-mail: contatophsports@gmail.com</p>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2025 PH Sports - Todos os direitos reservados</p>
+  </footer>
+
+  <!-- JavaScript Embutido -->
+  <script>
+    const menuHambButton = document.querySelector(".menu-hamb-button");
+    const navBarLinks = document.querySelector(".navbar-links");
+    const menuOverlay = document.querySelector(".menu-overlay");
+
+    menuHambButton.addEventListener("click", () => {
+      menuHambButton.classList.toggle("isOpen");
+      navBarLinks.classList.toggle("show");
+      menuOverlay.classList.toggle("show");
+    });
+
+    menuOverlay.addEventListener("click", () => {
+      menuHambButton.classList.remove("isOpen");
+      navBarLinks.classList.remove("show");
+      menuOverlay.classList.remove("show");
+    });
+  </script>
+
+</body>
+</html>
